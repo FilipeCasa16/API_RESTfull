@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #f5f0e6; /* bege claro */
+  color: #4a3f2f; /* marrom escuro */
+  min-height: 100vh;
 }
 
 .logo {
@@ -12,19 +15,15 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #d4b87caa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #f0d27baa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -35,8 +34,48 @@
 
 .card {
   padding: 2em;
+  background-color: #e8dcc5; /* bege médio */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 1.5rem;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #a1865a;
+}
+
+
+.btn {
+  background-color: #c9a66b;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background-color: #b08c56;
+}
+
+.btn-small {
+  padding: 6px 12px;
+}
+
+.btn-danger {
+  background-color: #c97b6b;
+}
+
+.btn-danger:hover {
+  background-color: #b0685a;
+}
+
+.btns-line {
+  display: flex;
+  gap: 8px;
+  margin-left: 12px;
 }

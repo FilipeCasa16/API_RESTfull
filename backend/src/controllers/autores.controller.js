@@ -1,21 +1,60 @@
-const autoresService = require('../services/autores.service');
+const db = require('../database');
 
+// LISTAR
 function list(req, res) {
-  try {
-    const data = autoresService.listAll();
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(err.status || 500).json({ error: err.message || 'Erro interno' });
-  }
+  db.query('SELECT * FROM autores', (erro, resultado) => {
+    if (erro) return res.status(500).json({ error: erro });
+    res.json(resultado);
+  });
 }
 
+// CRIAR
 function create(req, res) {
-  try {
-    const novo = autoresService.createAutor(req.body);
-    res.status(201).json(novo);
-  } catch (err) {
-    res.status(err.status || 500).json({ error: err.message || 'Erro interno' });
+  const { nome } = req.body;
+
+  if (!nome) {
+    return res.status(400).json({ error: "Campo nome é obrigatório" });
   }
+
+  db.query(
+    'INSERT INTO autores (nome) VALUES (?)',
+    [nome],
+    (erro, resultado) => {
+      if (erro) return res.status(500).json({ error: erro });
+
+      res.status(201).json({
+        id: resultado.insertId,
+        nome,
+      });
+    }
+  );
 }
 
-module.exports = { list, create };
+// EDITAR
+function update(req, res) {
+  const { id } = req.params;
+  const { nome } = req.body;
+
+  db.query(
+    'UPDATE autores SET nome=? WHERE id=?',
+    [nome, id],
+    (erro) => {
+      if (erro) return res.status(500).json({ error: erro });
+
+      res.json({ id, nome });
+    }
+  );
+}
+
+// EXCLUIR
+function remove(req, res) {
+  const { id } = req.params;
+
+  db.query('DELETE FROM autores WHERE id = ?', [id], (erro) => {
+    if (erro) return res.status(500).json({ error: erro });
+
+    res.status(204).send();
+  });
+}
+
+module.exports = { list, create, update, remove };

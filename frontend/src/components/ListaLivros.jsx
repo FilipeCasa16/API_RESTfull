@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { getLivros, createLivro, updateLivro, deleteLivro } from '../api/livrosApi';
 import FormLivro from './FormLivro';
 
-export default function ListaLivros() {
+export default function ListaLivros({ modo }) {
   const [livros, setLivros] = useState([]);
   const [editing, setEditing] = useState(null);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    if (modo === "listar") load();
+  }, [modo]);
 
   async function load() {
     const data = await getLivros();
@@ -14,40 +16,61 @@ export default function ListaLivros() {
   }
 
   async function handleCreate(body) {
-    const novo = await createLivro(body);
-    setLivros(prev => [...prev, novo]);
+    await createLivro(body);
+    load();
   }
 
   async function handleUpdate(body) {
-    const atualizado = await updateLivro(editing.id, body);
-    setLivros(prev => prev.map(l => l.id === atualizado.id ? atualizado : l));
+    await updateLivro(editing.id, body);
     setEditing(null);
+    load();
   }
 
   async function handleDelete(id) {
     if (!confirm('Deseja excluir?')) return;
     await deleteLivro(id);
-    setLivros(prev => prev.filter(l => l.id !== id));
+    load();
   }
 
-  return (
-    <div>
-      <h3>Livros</h3>
-      <ul>
+  if (modo === "criar") {
+    return (
+      <FormLivro
+        onSubmit={editing ? handleUpdate : handleCreate}
+      />
+    );
+  }
+
+  if (modo === "listar") {
+    return (
+      <ul style={{ listStyle: "disc", paddingLeft: 20 }}>
         {livros.map(l => (
-          <li key={l.id}>
-            {l.titulo} (autorId: {l.autorId}) — {l.ano || '-'}
-            <button onClick={()=>setEditing(l)}>Editar</button>
-            <button onClick={()=>handleDelete(l.id)}>Excluir</button>
+          <li key={l.id} style={{ marginBottom: 12 }}>
+            {l.titulo} — {l.ano_publicacao} — {l.genero}
+
+            <div className="btns-line">
+              <button className="btn btn-small" onClick={() => setEditing(l)}>
+                ✏️ Editar
+              </button>
+
+              <button
+                className="btn btn-small btn-danger"
+                onClick={() => handleDelete(l.id)}
+              >
+                🗑 Excluir
+              </button>
+            </div>
+
+            {editing?.id === l.id && (
+              <FormLivro
+                initial={editing}
+                onSubmit={handleUpdate}
+              />
+            )}
           </li>
         ))}
       </ul>
+    );
+  }
 
-      <h4>{editing ? 'Editar Livro' : 'Criar Livro'}</h4>
-      <FormLivro
-        initial={editing || {}}
-        onSubmit={editing ? handleUpdate : handleCreate}
-      />
-    </div>
-  );
+  return null;
 }

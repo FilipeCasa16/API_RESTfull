@@ -1,19 +1,32 @@
-let autores = [
-  { id: 1, nome: 'Machado de Assis' },
-  { id: 2, nome: 'Clarice Lispector' },
-  { id: 3, nome: 'Jorge Amado' }
-];
-let nextId = autores.length + 1;
+const db = require('../database');
 
 function listAll() {
-  return autores;
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM autores', (erro, resultado) => {
+      if (erro) return reject(erro);
+      resolve(resultado);
+    });
+  });
 }
 
 function createAutor(data) {
-  if (!data || !data.nome) throw { status: 400, message: 'Campo nome é obrigatório' };
-  const novo = { id: nextId++, nome: data.nome };
-  autores.push(novo);
-  return novo;
+  return new Promise((resolve, reject) => {
+    if (!data || !data.nome)
+      return reject({ status: 400, message: 'Campo nome é obrigatório' });
+
+    db.query(
+      'INSERT INTO autores (nome) VALUES (?)',
+      [data.nome],
+      (erro, resultado) => {
+        if (erro) return reject(erro);
+
+        resolve({
+          id: resultado.insertId,
+          nome: data.nome
+        });
+      }
+    );
+  });
 }
 
 module.exports = { listAll, createAutor };

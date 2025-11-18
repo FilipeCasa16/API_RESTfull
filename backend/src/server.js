@@ -8,10 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// rota base pra teste
-app.get('/', (req, res) => res.send('API Inventário de Livros e Autores rodando 🚀'));
+// rota base
+app.get('/', (req, res) => res.send('API Inventário rodando 🚀'));
 
-// rotas da API
+// ROTAS
 app.use('/api/livros', livrosRoutes);
 app.use('/api/autores', autoresRoutes);
 

@@ -1,42 +1,103 @@
-import { useEffect, useState } from 'react';
-import { getAutores, createAutor } from '../api/autoresApi';
+import { useEffect, useState } from "react";
+import {
+  getAutores,
+  createAutor,
+  updateAutor,
+  deleteAutor,
+} from "../api/autoresApi";
 
-export default function ListaAutores() {
+export default function ListaAutores({ modo }) {
   const [autores, setAutores] = useState([]);
-  const [nome, setNome] = useState('');
+  const [nome, setNome] = useState("");
+  const [editandoId, setEditandoId] = useState(null);
+  const [nomeEdit, setNomeEdit] = useState("");
 
   useEffect(() => {
-    getAutores().then(setAutores);
-  }, []);
+    if (modo === "listar") carregar();
+  }, [modo]);
 
-  const handleCreate = async (e) => {
+  async function carregar() {
+    const lista = await getAutores();
+    setAutores(lista);
+  }
+
+  async function salvarCriacao(e) {
     e.preventDefault();
-    if (!nome) return alert('Informe o nome do autor');
-    try {
-      const novo = await createAutor({ nome });
-      setAutores(prev => [...prev, novo]);
-      setNome('');
-    } catch (err) {
-      console.error('Erro ao criar autor:', err);
-      alert('Erro ao criar autor.');
-    }
-  };
+    if (!nome) return alert("Digite um nome");
+    await createAutor({ nome });
+    setNome("");
+    carregar();
+  }
 
-  return (
-    <div>
-      <h3>Autores</h3>
-      <ul>
-        {autores.map(a => <li key={a.id}>{a.nome}</li>)}
-      </ul>
+  async function salvarEdicao(id) {
+    if (!nomeEdit) return alert("Digite um nome");
+    await updateAutor(id, { nome: nomeEdit });
+    setEditandoId(null);
+    carregar();
+  }
 
-      <form onSubmit={handleCreate}>
+  async function excluir(id) {
+    if (!confirm("Excluir autor?")) return;
+    await deleteAutor(id);
+    carregar();
+  }
+
+  if (modo === "criar") {
+    return (
+      <form onSubmit={salvarCriacao}>
         <input
           value={nome}
-          onChange={e => setNome(e.target.value)}
+          onChange={(e) => setNome(e.target.value)}
           placeholder="Nome do autor"
         />
-        <button type="submit">Criar Autor</button>
+        <button className="btn">Criar Autor</button>
       </form>
-    </div>
-  );
+    );
+  }
+
+  if (modo === "listar") {
+    return (
+      <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+        {autores.map((a) => (
+          <li key={a.id} style={{ marginBottom: 16 }}>
+            {editandoId === a.id ? (
+              <>
+                <input
+                  value={nomeEdit}
+                  onChange={(e) => setNomeEdit(e.target.value)}
+                />
+                <button className="btn" onClick={() => salvarEdicao(a.id)}>
+                  Salvar
+                </button>
+              </>
+            ) : (
+              <>
+                {a.nome}
+                <div className="btns-line">
+                  <button
+                    className="btn btn-small"
+                    onClick={() => {
+                      setEditandoId(a.id);
+                      setNomeEdit(a.nome);
+                    }}
+                  >
+                    ✏️ Editar
+                  </button>
+
+                  <button
+                    className="btn btn-small btn-danger"
+                    onClick={() => excluir(a.id)}
+                  >
+                    🗑 Excluir
+                  </button>
+                </div>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  return null;
 }
