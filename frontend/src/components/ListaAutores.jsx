@@ -13,8 +13,8 @@ export default function ListaAutores({ modo }) {
   const [nomeEdit, setNomeEdit] = useState("");
 
   useEffect(() => {
-    if (modo === "listar") carregar();
-  }, [modo]);
+    carregar();
+  }, []);
 
   async function carregar() {
     const lista = await getAutores();
@@ -24,31 +24,29 @@ export default function ListaAutores({ modo }) {
   async function salvarCriacao(e) {
     e.preventDefault();
     if (!nome) return alert("Digite um nome");
-    await createAutor({ nome });
+    const novo = await createAutor({ nome });
+    setAutores((prev) => [...prev, novo]);
     setNome("");
-    carregar();
   }
 
   async function salvarEdicao(id) {
     if (!nomeEdit) return alert("Digite um nome");
-    await updateAutor(id, { nome: nomeEdit });
+    const atualizado = await updateAutor(id, { nome: nomeEdit });
+    setAutores((prev) =>
+      prev.map((a) => (a.id === id ? atualizado : a))
+    );
     setEditandoId(null);
-    carregar();
   }
 
-async function excluir(id) {
-  if (!confirm("Excluir autor?")) return;
-
-  const res = await deleteAutor(id);
-
-  if (!res.ok) {
-    alert("Não dá pra excluir este autor porque ele tem livros cadastrados.");
-    return;
+  async function excluir(id) {
+    if (!confirm("Excluir autor?")) return;
+    const res = await deleteAutor(id);
+    if (!res.ok) {
+      alert("Não dá pra excluir este autor porque ele tem livros cadastrados.");
+      return;
+    }
+    setAutores((prev) => prev.filter((a) => a.id !== id));
   }
-
-  carregar();
-}
-
 
   if (modo === "criar") {
     return (

@@ -23,7 +23,7 @@ function createLivro(data) {
 function updateLivro(id, data) {
   const livro = findById(id);
   if (!livro) throw { status: 404, message: 'Livro não encontrado' };
-  // apenas campos permitidos
+
   const { titulo, autorId, ano, genero } = data;
   if (titulo !== undefined) livro.titulo = titulo;
   if (autorId !== undefined) livro.autorId = Number(autorId);

@@ -20,13 +20,13 @@ function getById(req, res) {
   });
 }
 
-// CRIAR LIVRO (com mapeamento autorId -> autor_id e ano -> ano_publicacao)
+// CRIAR LIVRO 
 function create(req, res) {
   console.log("BODY RECEBIDO NO CREATE:", req.body);
 
   let { titulo, autor_id, ano_publicacao, genero, autorId, ano, genre } = req.body;
 
-  // Aceitar nomes alternativos vindos do front
+
   if (!autor_id && autorId) autor_id = autorId;
   if (!ano_publicacao && ano) ano_publicacao = ano;
   if (!genero && genre) genero = genre;
@@ -49,7 +49,7 @@ function create(req, res) {
 }
 
 
-// ATUALIZAR LIVRO (corrigido e compatível com o front)
+// ATUALIZAR LIVRO 
 function update(req, res) {
   console.log("BODY RECEBIDO NO UPDATE:", req.body);
 
@@ -78,7 +78,7 @@ function update(req, res) {
 }
 
 
-// REMOVER
+
 function remove(req, res) {
   const { id } = req.params;
 
