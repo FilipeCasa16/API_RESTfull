@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #4a3f2f; /* marrom escuro */
-  background-color: #f5f0e6; /* bege claro */
+  color: #4a3f2f; 
+  background-color: #f5f0e6; 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,7 +30,7 @@ h1 {
 
 a {
   font-weight: 500;
-  color: #c9a66b; /* dourado escuro */
+  color: #c9a66b; 
   text-decoration: inherit;
 }
 a:hover {
@@ -44,7 +44,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #d4b87c; /* tom de amarelo escurecido */
+  background-color: #d4b87c; 
   color: #4a3f2f;
   cursor: pointer;
   transition: all 0.25s;
@@ -58,21 +58,21 @@ button:focus-visible {
   outline: 4px auto #bfa25a;
 }
 
-/* Inputs e selects com fundo estilizado */
+
 input, select, textarea {
-  background-color: #f0e3c8; /* bege claro suave */
-  border: 1px solid #d4b87c; /* borda tom amarelo escuro */
+  background-color: #f0e3c8; 
+  border: 1px solid #d4b87c; 
   border-radius: 6px;
   padding: 0.5em 0.8em;
-  color: #4a3f2f; /* texto marrom escuro */
+  color: #4a3f2f; 
   font-family: inherit;
   font-size: 1em;
   transition: all 0.25s;
 }
 
 input:focus, select:focus, textarea:focus {
-  border-color: #c9a66b; /* destaque ao focar */
-  background-color: #fff7e0; /* leve amarelo mais claro */
+  border-color: #c9a66b; 
+  background-color: #fff7e0; 
   outline: none;
 }
 

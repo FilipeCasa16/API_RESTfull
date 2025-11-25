@@ -36,11 +36,19 @@ export default function ListaAutores({ modo }) {
     carregar();
   }
 
-  async function excluir(id) {
-    if (!confirm("Excluir autor?")) return;
-    await deleteAutor(id);
-    carregar();
+async function excluir(id) {
+  if (!confirm("Excluir autor?")) return;
+
+  const res = await deleteAutor(id);
+
+  if (!res.ok) {
+    alert("Não dá pra excluir este autor porque ele tem livros cadastrados.");
+    return;
   }
+
+  carregar();
+}
+
 
   if (modo === "criar") {
     return (
