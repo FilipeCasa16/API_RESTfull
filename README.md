@@ -75,7 +75,8 @@ USE inventario_livros;
 
 **Criando tabelas**
 -Para criar as tabelas escreva o código 
-`````bash
+
+````bash
 CREATE TABLE autores (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL
@@ -90,6 +91,8 @@ CREATE TABLE livros (
   FOREIGN KEY (autor_id) REFERENCES autores(id)
 );
 ````
+
+CONTINUAÇÃO
 
 (Inserindo dados)
 
@@ -109,16 +112,3 @@ INSERT INTO livros (titulo, ano_publicacao, autor_id, genero) VALUES
 (testando se os dados foram enseridos)
 SELECT * FROM livros;
 SELECT * FROM autores;
-
-
-
-
-
-
-
-
-
-
-
-
-
