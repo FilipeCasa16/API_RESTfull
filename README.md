@@ -31,6 +31,12 @@ git clone https://github.com/FilipeCasa16/API_RESTfull.git
 cd API_RESTfull
 ````
 
+Ou se for o caso, use apenas o link:
+
+````bash
+https://github.com/FilipeCasa16/API_RESTfull.git
+````
+
 Logo após deve se abrir o arquivo do projeto no aplicativo Visual Estudio Code(VScode), abrir a pasta do projeto API_RESTfull, em seguida abrir a pasta "backend", abrir a pasta "src", e entrar no arquivo "database.js" e na linha "password" colocar a sua senha do MySQL aonde é requisitado e salvar o arquivo usando ``CTRL + S``.
 
 ``EXEMPLO:``
