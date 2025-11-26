@@ -8,7 +8,9 @@ CTRL + ALT + DEL
 
 **Descrição do Projeto**
 ------------------------
-Um sistema de inventário de livros e autores, o sistema permite adicionar autores, e adicionar livros por nome, autor cadastrado, ano de publicação e gênero da obra. Sendo possivel, adicionar, aditar e excluir autores e livros se necessário.  
+Um sistema de inventário de livros e autores, o sistema permite adicionar autores,
+e adicionar livros por nome, autor cadastrado, ano de publicação e gênero da obra.
+Sendo possivel, adicionar, aditar e excluir autores e livros se necessário.  
 
 
 
@@ -18,6 +20,7 @@ Um sistema de inventário de livros e autores, o sistema permite adicionar autor
 **Pré-Requisitos (Aplicativos Necessários)**
 
 -MySQL Workbench 8.0
+
 -Visual Estudio Code
 
 
@@ -28,13 +31,16 @@ git clone https://github.com/FilipeCasa16/API_RESTfull.git
 cd API_RESTfull
 ````
 
-Logo após deve se abrir o arquivo do projeto no aplicativo Visual Estudio Code(VScode), abrir a pasta do projeto API_RESTfull, em seguida abrir a pasta "backend", abrir a pasta "src", e entrar no arquivo "database.js" e na linha "password" colocar a sua senha do MySQL aonde é requisitado.
+Logo após deve se abrir o arquivo do projeto no aplicativo Visual Estudio Code(VScode), abrir a pasta do projeto API_RESTfull, em seguida abrir a pasta "backend", abrir a pasta "src", e entrar no arquivo "database.js" e na linha "password" colocar a sua senha do MySQL aonde é requisitado e salvar o arquivo usando ``CTRL + S``.
 
 ``EXEMPLO:``
 ``password: 'sua_senha_mysql',``
 
 **Segundo Passo: Instalar Dependências**
 ----------------------------------------
+
+Após isso, se deve abrir dois terminal do seu computador, e em um deles, navegue até o **backend**, e no outro navegue até o **frontend**, e logo após instalar as dependências que se pede em cada um deles.
+
 **Backend** 
 ````bash
 cd backend
@@ -59,6 +65,7 @@ npm install axios
 --------------------------------------------------------------
 
 **Configurar o banco MySQL**
+
 -Crie um banco de dados chamado: inventario_de_livros 
 
 -Para criar o banco, escreva o código: 
@@ -74,7 +81,8 @@ USE inventario_livros;
 -------------------
 
 **Criando tabelas**
--Para criar as tabelas escreva o código 
+
+-Para criar as tabelas escreva os códigos abaixo e execute cada um separadamente
 
 ````bash
 CREATE TABLE autores (
@@ -92,10 +100,12 @@ CREATE TABLE livros (
 );
 ````
 
-CONTINUAÇÃO
 
-(Inserindo dados)
+**Inserindo dados**
 
+-Para inserir os dados iniciais nas tabelas escreva os códigos abaixo e execute cada um separadamente
+
+````bash
 INSERT INTO autores (id, nome) VALUES
 (2, 'Clarice Lispector'),
 (4, 'Jeff Kinney'),
@@ -107,8 +117,37 @@ INSERT INTO autores (id, nome) VALUES
 INSERT INTO livros (titulo, ano_publicacao, autor_id, genero) VALUES
 ('Água Viva', 1963, 2, 'Romance'),
 ('Diário de um Banana', 2010, 4, 'Comédia');
+````
+
+**Iniciar servidor do backend**
+
+Logo após entre novamente no terminal do **backend** e inicie seu servidor com o código:
+
+````bash
+npm run dev
+````
+
+**Quarto Passo: Configurar o Frontend**
+---------------------------------------
+
+No terminal do **frontend** e inicie seu servidor com o código:
+
+````bash
+npm run dev
+````
+
+**Acessando o Projeto**
+-----------------------
+
+Para acessar o projeto, entre em uma nova aba de seu navegador e abra esses **links**:
+
+-Frontend: http://localhost:5173/
+
+-Backend: http://localhost:3001 se aparecer a mensagem (API Inventário rodando 🚀), o backend esta funcionando.
 
 
-(testando se os dados foram enseridos)
-SELECT * FROM livros;
-SELECT * FROM autores;
+**Desenvolvedores**
+-------------------
+
+Bianca Gabriela Golfe, Filipe Casadei e Laura Leandra Faccin.
+
