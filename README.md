@@ -8,7 +8,7 @@ CTRL + ALT + DEL
 
 **Descrição do Projeto**
 ------------------------
-Um sistema de inventário de livros e autores, o sistema permite adicionar autores,
+Um sistema de inventário de livros e autores, o sistema permite adicionar autores
 e adicionar livros por nome, autor cadastrado, ano de publicação e gênero da obra.
 Sendo possivel, adicionar, aditar e excluir autores e livros se necessário.  
 
