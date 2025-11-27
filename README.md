@@ -37,7 +37,7 @@ Ou se for o caso, use apenas o link:
 https://github.com/FilipeCasa16/API_RESTfull.git
 ````
 
-Logo após deve se abrir o arquivo do projeto no aplicativo Visual Estudio Code(VScode), abrir a pasta do projeto API_RESTfull, em seguida abrir a pasta "backend", abrir a pasta "src", e entrar no arquivo "database.js" e na linha "password" colocar a sua senha do MySQL aonde é requisitado e salvar o arquivo usando ``CTRL + S``.
+Logo após deve de abrir o arquivo do projeto no aplicativo Visual Studio Code(VScode), abrir a pasta do projeto API_RESTfull, em seguida abrir a pasta "backend", abrir a pasta "src", e entrar no arquivo "database.js" e na linha "password" colocar a sua senha do MySQL aonde é requisitado e salvar o arquivo usando ``CTRL + S``.
 
 ``EXEMPLO:``
 ``password: 'sua_senha_mysql',``
@@ -45,7 +45,7 @@ Logo após deve se abrir o arquivo do projeto no aplicativo Visual Estudio Code(
 **Segundo Passo: Instalar Dependências**
 ----------------------------------------
 
-Após isso, se deve abrir dois terminal do seu computador, e em um deles, navegue até o **backend**, e no outro navegue até o **frontend**, e logo após instalar as dependências que se pede em cada um deles.
+Após isso, você deve abrir dois terminais do seu computador, em um dele navegue até o **backend**, e no outro navegue até o **frontend**, e logo após instalar as dependências que se pede em cada um deles.
 
 **Backend** 
 ````bash
